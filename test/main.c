@@ -6,11 +6,12 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 22:50:54 by mgama             #+#    #+#             */
-/*   Updated: 2024/02/18 12:39:18 by mgama            ###   ########.fr       */
+/*   Updated: 2024/02/18 13:28:27 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../srcs/font.h"
+#include "render/font_render.h"
 #include "images/images.h"
 
 # ifdef __APPLE__
@@ -39,6 +40,7 @@ int	ft_loop_hook_events(void *param)
 	t_data	*mlx;
 
 	mlx = (t_data *)param;
+	ft_put_image_to_window(mlx, mlx->image, 0, 0);
 	mlx_do_sync(mlx->mlx);
 	return (0);
 }
@@ -69,11 +71,13 @@ void	ft_init_mlx_hook(t_data *mlx)
 int	main(int ac, char **av)
 {
 	t_data	mlx;
+	t_font	font;
 
 	ft_bzero(&mlx, sizeof(t_data));
 	ft_init_mlx_f(&mlx);
 	ft_init_mlx_hook(&mlx);
-	// t_data.image = ft_crea
+	ft_create_new_font(&font, "ttf", "assets/fonts/comfortaa_bold.ttf", "comfortaa");	
+	mlx.image = ft_create_string(&mlx, &font, create_t_string("Hello World", 50, 0x00FF00, "arial"), NULL, NULL);
 	mlx_loop(mlx.mlx);
 	return (0);
 }

@@ -6,18 +6,11 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 13:09:41 by mgama             #+#    #+#             */
-/*   Updated: 2024/02/18 12:01:50 by mgama            ###   ########.fr       */
+/*   Updated: 2024/02/18 13:22:48 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "font.h"
-
-t_string	create_t_string(const char *text, uint32_t size,
-	uint32_t color, const char *font_name)
-{
-	return ((t_string){.text = text, .size = size,
-		.color = color, .font_name = font_name});
-}
 
 int	ft_push_new_font(t_font *font, void	*ttf)
 {
@@ -54,8 +47,7 @@ int	ft_create_new_font(t_font *font, const char *type,
 	if (ft_strcmp("ttf", type) == 0)
 	{
 		if (!ft_extension(path, ".ttf"))
-			return (ft_error(FONT_ERROR_PREFIX"Invalid font name.\n"),
-				FONT_ERROR);
+			return (ft_error(FONT_ERROR_PREFIX"Invalid font name.\n"), FONT_ERROR);
 		if (ft_push_new_font(font, ft_create_ttf_font(path, font_name)))
 			return (FONT_ERROR);
 		return (FONT_NO_ERROR);

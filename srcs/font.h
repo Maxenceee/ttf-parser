@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 13:00:25 by mgama             #+#    #+#             */
-/*   Updated: 2024/02/18 12:00:42 by mgama            ###   ########.fr       */
+/*   Updated: 2024/02/18 13:22:45 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,5 @@ void		free_ttf_kern(t_true_type_font *this);
 void		free_ttf_cmap_caches(t_ttcmap4 *this);
 void		free_ttf_cmap(t_true_type_font *this);
 void		free_ttf_tables(t_true_type_font *this);
-
-/* create t_string */
-
-t_string	create_t_string(const char *text, uint32_t size,
-				uint32_t color, const char *font_name);
 
 #endif /* FONT_H */

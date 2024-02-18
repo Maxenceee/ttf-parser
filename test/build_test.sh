@@ -10,6 +10,7 @@ fi
 
 SRCS="main.c"
 SRCS+=" $(find images -name "*.c" -type f)"
+SRCS+=" $(find render -name "*.c" -type f)"
 
 echo $SRCS
 
