@@ -1,0 +1,5 @@
+.objs
+a.out
+**/a.out
+ttf_parser.a
+.vscode
