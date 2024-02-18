@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 22:50:54 by mgama             #+#    #+#             */
-/*   Updated: 2024/02/18 12:35:44 by mgama            ###   ########.fr       */
+/*   Updated: 2024/02/18 12:39:18 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,26 @@ int	ft_loop_hook_events(void *param)
 	return (0);
 }
 
+/**
+ * @brief Stops and exits the game cleanly
+ * 
+ */
+int	ft_stop_mlx(t_data *mlx)
+{
+	if (mlx->image != NULL)
+		ft_delete_image(mlx->mlx, &(mlx->image));
+	if (mlx->window != NULL)
+		mlx_destroy_window(mlx->mlx, mlx->window);
+#ifndef __APPLE__
+	mlx_destroy_display(mlx);
+#endif /* __APPLE__ */
+	free(mlx->mlx);
+	exit(EXIT_SUCCESS);
+}
+
 void	ft_init_mlx_hook(t_data *mlx)
 {
-	// mlx_hook(mlx->window, 0x11, 1L << 0, &ft_stop_mlx, mlx);
-	// mlx_hook(mlx->window, 0x02, 1L << 0, &ft_key_down_event, mlx);
-	// mlx_hook(mlx->window, 0x03, 1L << 1, &ft_key_up_event, mlx);
-	// mlx_hook(mlx->window, 0x04, 1L << 2, &ft_mouse_down_event, mlx);
-	// mlx_hook(mlx->window, 0x05, 1L << 3, &ft_mouse_up_event, mlx);
-	// mlx_hook(mlx->window, 0x06, 1L << 6, &ft_mouse_move_event, mlx);
+	mlx_hook(mlx->window, 0x11, 1L << 0, &ft_stop_mlx, mlx);
 	mlx_loop_hook(mlx->mlx, &ft_loop_hook_events, mlx);
 }
 
