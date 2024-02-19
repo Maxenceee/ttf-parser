@@ -6,13 +6,16 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 22:03:35 by mgama             #+#    #+#             */
-/*   Updated: 2024/02/19 14:48:56 by mgama            ###   ########.fr       */
+/*   Updated: 2024/02/19 16:01:56 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "font.h"
+#include "images/images.h"
 
-void	draw_grlyph_path(t_glyph *glyph, t_glyph_ctx *ctx, t_pointi2 pos)
+void	reflect(t_glyph_ctx *ctx, int *x, int *y);
+
+void	draw_glyph_path(t_glyph *glyph, t_glyph_ctx *ctx, t_pointi2 pos)
 {
 	t_glyph_point	*gpoint;
 	t_glyph_point	*prev;
@@ -232,10 +235,122 @@ void	draw_grlyph_path(t_glyph *glyph, t_glyph_ctx *ctx, t_pointi2 pos)
 // 	}
 // }
 
+#include <stdlib.h>
+
+// Structure pour stocker les bords d'une intersection
+typedef struct {
+    int x;
+    int dx;
+    int ymax;
+} Edge;
+
+// Structure pour représenter un pixel
+typedef struct {
+    int x;
+    int y;
+} Pixel;
+
+// Fonction de comparaison pour qsort
+int compare_edges(const void *a, const void *b) {
+    const Edge *edge1 = (const Edge *)a;
+    const Edge *edge2 = (const Edge *)b;
+    return (edge1->x - edge2->x);
+}
+
+void fill_simple_glyph(t_glyph *glyph, t_glyph_ctx *ctx, t_pointi2 position) {
+    // Créer un tableau pour stocker les bords
+    Edge *edges = malloc(glyph->numpoints * sizeof(Edge));
+    if (edges == NULL) {
+        // Gérer l'erreur de mémoire
+        return;
+    }
+
+    // Initialiser les bords en parcourant les contours du glyphe
+    int edge_count = 0;
+    t_glyph_contour *contour = glyph->contour_ends;
+    while (contour != NULL) {
+        t_glyph_point *current = get_glyph_point_by_id(glyph, contour->val);
+        t_glyph_point *next = get_glyph_point_by_id(glyph, (contour->next != NULL) ? contour->next->val : 0);
+        while (current != NULL && next != NULL) {
+            // Ajouter un bord horizontal si nécessaire
+            if (current->y != next->y) {
+                int ymin = (current->y < next->y) ? current->y : next->y;
+                int ymax = (current->y > next->y) ? current->y : next->y;
+                if (ymax > position.y && ymin < position.y) {
+                    edges[edge_count].x = current->x + position.x;
+                    edges[edge_count].dx = (next->x - current->x) / (next->y - current->y);
+                    edges[edge_count].ymax = ymax;
+                    edge_count++;
+                }
+            }
+            // Passer au point suivant
+            current = next;
+            next = next->next;
+        }
+        contour = contour->next;
+    }
+
+    // Trier les bords selon x
+    qsort(edges, edge_count, sizeof(Edge), compare_edges);
+
+    // Initialiser les bords actifs
+    Edge *active_edges = malloc(glyph->numpoints * sizeof(Edge));
+    if (active_edges == NULL) {
+        // Gérer l'erreur de mémoire
+        free(edges);
+        return;
+    }
+    int active_count = 0;
+
+    // Parcourir les lignes de scan
+    for (int y = position.y; y <= glyph->y_max + position.y; y++) {
+        // Ajouter les nouveaux bords actifs
+        while (edge_count > 0 && edges[edge_count - 1].ymax == y) {
+            active_edges[active_count] = edges[edge_count - 1];
+            active_count++;
+            edge_count--;
+        }
+
+        // Trier les bords actifs selon x
+        qsort(active_edges, active_count, sizeof(Edge), compare_edges);
+
+        // Remplir les pixels entre les bords actifs
+        for (int i = 0; i < active_count; i += 2) {
+            int x_start = active_edges[i].x;
+            int x_end = active_edges[i + 1].x;
+            for (int x = x_start; x <= x_end; x++) {
+                // Remplir le pixel (x, y)
+                // Par exemple, vous pouvez utiliser une fonction comme pointc
+                // pour dessiner le pixel à la position (x, y)
+				printf("x=%d y=%d\n", x, y);
+				ft_pixel_put(ctx->pr.image, x, y, ctx->color);
+            }
+        }
+
+        // Mettre à jour les bords actifs
+        int j = 0;
+        for (int i = 0; i < active_count; i++) {
+            if (active_edges[i].ymax > y + 1) {
+                active_edges[j] = active_edges[i];
+                j++;
+            }
+        }
+        active_count = j;
+
+        // Mettre à jour les bords actifs pour la prochaine ligne de scan
+        for (int i = 0; i < active_count; i++) {
+            active_edges[i].x += active_edges[i].dx;
+        }
+    }
+
+    // Libérer la mémoire
+    free(edges);
+    free(active_edges);
+}
+
 int	draw_glyph(t_true_type_font *this, t_glyph_ctx ctx, t_pointi2 pos)
 {
-	t_glyph			*glyph;
-	// uint32_t		tmpc;
+	t_glyph		*glyph;
 
 	glyph = read_glyph(this, ctx.pr.index);
 	if (!glyph)
@@ -244,11 +359,11 @@ int	draw_glyph(t_true_type_font *this, t_glyph_ctx ctx, t_pointi2 pos)
 	if (!ctx.points)
 		return (ft_error(FONT_ALLOC_ERROR_MSG), destroy_glyph(glyph),
 			FONT_ALLOC_ERROR);
-	// tmpc = ctx.color;
 	ctx.color = 0x00FF00;
-	draw_grlyph_path(glyph, &ctx, pos);
-	// ctx.color = tmpc;
+	draw_glyph_path(glyph, &ctx, pos);
+	// ctx.color = 0xFFFFFF;
 	// fill_glyph(glyph, &ctx, pos);
+	// fill_simple_glyph(glyph, &ctx, pos);
 	free(ctx.points);
 	destroy_glyph(glyph);
 	return (FONT_NO_ERROR);

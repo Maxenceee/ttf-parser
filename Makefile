@@ -4,6 +4,7 @@ OBJ_DIR			=	.objs
 # fonts
 SRCS			=	$(MANDATORY_DIR)/free_ttf.c \
 					$(MANDATORY_DIR)/font.c \
+					$(MANDATORY_DIR)/fontapi.c \
 					$(MANDATORY_DIR)/parser/tables_objects/cmap/true_type_cmap0_map.c \
 					$(MANDATORY_DIR)/parser/tables_objects/cmap/true_type_cmap4.c \
 					$(MANDATORY_DIR)/parser/tables_objects/cmap/true_type_cmap0.c \
@@ -125,38 +126,6 @@ clean:
 fclean: clean
 	@echo "$(RED)Cleaning $(NAME)$(DEFAULT)"
 	@$(RM) $(NAME)
-
-# ------------------ TEST ------------------
-
-# TEST_SRCS		=	$(shell find test -name "*.c")
-# TEST_OBJS		=	$(patsubst test/%.c, $(OBJ_DIR)/%.o, $(TEST_SRCS))
-
-# ifeq ($(shell uname), Darwin)
-# 	MLX_DIR			=	libmlx_mac
-# 	MLX_LIB			=	-L ./$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
-# else
-# 	MLX_DIR			=	libmlx_linux
-# 	MLX_LIB			=	-L./$(MLX_DIR) -lmlx -lX11 -lXext -lm
-# endif
-
-# $(OBJ_DIR)/%.o: test/%.c Makefile
-# 	@mkdir -p $(@D)
-# 	@echo "$(YELLOW)Compiling [$<]$(DEFAULT)"
-# 	@$(CC) $(CFLAGS) -c $< -o $@
-# 	@printf ${UP}${CUT}
-
-# lib:
-# 	@echo "$(YELLOW)Make MLX$(DEFAULT)"
-# 	@make -sC $(MLX_DIR)
-# 	@echo "$(GREEN)MLX compiled!$(DEFAULT)"
-# #	@echo "$(BLUE)Compiling...$(DEFAULT)"
-
-# test: lib
-# 	@echo "$(YELLOW)Compiling test...$(DEFAULT)"
-# 	@$(CC) $(TEST_OBJS) $(MLX_LIB) $(NAME) -o ttf_parser_tester
-# 	@echo "$(GREEN)Test compiled!$(DEFAULT)"
-
-# # ------------------ ---- ------------------
 
 re: fclean all
 

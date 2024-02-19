@@ -1,3 +1,29 @@
+/**!
+
+
+
+
+
+
+ __  __                                                  ____
+|  \/  |   __ _  __  __   ___   _ __     ___    ___     / ___|   __ _   _ __ ___     __ _ 
+| |\/| |  / _` | \ \/ /  / _ \ | '_ \   / __|  / _ \   | |  _   / _` | | '_ ` _ \   / _` |
+| |  | | | (_| |  >  <  |  __/ | | | | | (__  |  __/   | |_| | | (_| | | | | | | | | (_| |
+|_|  |_|  \__,_| /_/\_\  \___| |_| |_|  \___|  \___|    \____|  \__,_| |_| |_| |_|  \__,_|
+
+
+
+
+
+
+
+ */
+/**!
+ *   @license © Copyright 2024, All rights reserved.
+ *   @author Maxence Gama, @maxencegama
+ *   @contact contact@maxencegama.dev
+ */
+
 const readFile = (fileName) => new Promise(async (resolve, reject) => {
 	let b = (await fetch(fileName)).arrayBuffer();
 	return resolve(b);
@@ -1051,6 +1077,6 @@ function ShowTtfFile(arrayBuffer)
 }
 
 (async function() {
-	let buffer = await readFile("/../assets/fonts/comfortaa_bold.ttf");
+	let buffer = await readFile("../assets/fonts/comfortaa_bold.ttf");
 	ShowTtfFile(buffer);
 })();

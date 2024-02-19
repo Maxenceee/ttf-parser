@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 13:00:25 by mgama             #+#    #+#             */
-/*   Updated: 2024/02/19 14:14:02 by mgama            ###   ########.fr       */
+/*   Updated: 2024/02/19 16:33:53 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ extern struct s_font	g_font;
 /* create new ttf font */
 
 int			ft_create_new_font(const char *type, char *path, const char *font_name);
+void		*get_font_by_name(t_font font, const char *font_name);
 
 /* destroy ttf font */
 

@@ -9,9 +9,5 @@ else
 fi
 
 SRCS="main.c"
-# SRCS+=" $(find images -name "*.c" -type f)"
-# SRCS+=" $(find render -name "*.c" -type f)"
-
-echo $SRCS
 
 gcc $SRCS $MLX_LIB ../ttf_parser.a -g3

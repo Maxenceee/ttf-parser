@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 22:50:54 by mgama             #+#    #+#             */
-/*   Updated: 2024/02/19 14:46:23 by mgama            ###   ########.fr       */
+/*   Updated: 2024/02/19 16:35:05 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,8 @@
 #  include "libmlx_linux/mlx.h"
 # endif /* __APPLE__ */
 
-# ifdef __APPLE__
 #  define WINDOW_WIDTH	1280
 #  define WINDOW_HEIGHT	720
-# else
-#  define WINDOW_WIDTH	1900
-#  define WINDOW_HEIGHT	990
-# endif /* __APPLE__ */
-
 
 typedef struct s_data
 {
@@ -46,9 +40,6 @@ void	ft_init_mlx_f(t_data *mlx)
 	mlx->window = mlx_new_window(mlx->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "TTF Parser demo");
 	if (!mlx->window)
 		exit(1);
-	// mlx->image = ft_new_image(mlx->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
-	// if (!mlx->image)
-	// 	exit(1);
 }
 
 int	ft_put_image_to_window(t_data *mlx, t_img *image, int x, int y)
@@ -61,15 +52,11 @@ int	ft_loop_hook_events(void *param)
 	t_data	*mlx;
 
 	mlx = (t_data *)param;
-	ft_put_image_to_window(mlx, mlx->image, 0, 0);
+	ft_put_image_to_window(mlx, mlx->image, 20, 20);
 	mlx_do_sync(mlx->mlx);
 	return (0);
 }
 
-/**
- * @brief Stops and exits the game cleanly
- * 
- */
 int	ft_stop_mlx(t_data *mlx)
 {
 	if (mlx->image != NULL)
@@ -98,7 +85,9 @@ int	main(int ac, char **av)
 	ft_init_mlx_hook(&mlx);
 	if (ft_create_new_font("ttf", "../assets/fonts/comfortaa_bold.ttf", "comfortaa"))
 		return (1);
-	mlx.image = ft_create_string(&mlx, NULL, "Hello World", 50, 0x00FF00, "comfortaa", NULL, NULL);
-	mlx_loop(mlx.mlx);
+	t_true_type_font *font = get_font("comfortaa");
+	printf("Font loaded %p\n", font);
+	// mlx.image = ft_create_string(&mlx, NULL, "Hello World", 100, 0x00FF00, "comfortaa", NULL, NULL);
+	// mlx_loop(mlx.mlx);
 	return (0);
 }
