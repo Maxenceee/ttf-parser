@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 12:42:56 by mgama             #+#    #+#             */
-/*   Updated: 2024/02/18 12:10:20 by mgama            ###   ########.fr       */
+/*   Updated: 2024/02/19 13:24:57 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,7 @@ int	read_simple_glyph(t_true_type_font *this, t_glyph *glyph)
 	while (++i < glyph->number_of_contours)
 		if (push_glyph_contour(glyph, this->file->get_uint16(this->file)))
 			return (FONT_ALLOC_ERROR);
-	this->file->seek(this->file, this->file->get_uint16(this->file)
-		+ this->file->tell(this->file));
+	this->file->seek(this->file, this->file->get_uint16(this->file) + this->file->tell(this->file));
 	if (glyph->number_of_contours == 0)
 		return (FONT_NO_ERROR);
 	glyph->numpoints = list_max(glyph->contour_ends) + 1;
@@ -105,9 +104,7 @@ int	read_simple_glyph(t_true_type_font *this, t_glyph *glyph)
 	if (!glyph->flags)
 		return (FONT_ALLOC_ERROR);
 	read_simple_glyph_points(this, glyph);
-	read_coord(this, glyph, 'x',
-		(t_glyph_coord_flag){.byte_flag = X_IS_BYTE, .delta_flag = X_DELTA});
-	read_coord(this, glyph, 'y',
-		(t_glyph_coord_flag){.byte_flag = Y_IS_BYTE, .delta_flag = Y_DELTA});
+	read_coord(this, glyph, 'x', (t_glyph_coord_flag){.byte_flag = X_IS_BYTE, .delta_flag = X_DELTA});
+	read_coord(this, glyph, 'y', (t_glyph_coord_flag){.byte_flag = Y_IS_BYTE, .delta_flag = Y_DELTA});
 	return (FONT_NO_ERROR);
 }

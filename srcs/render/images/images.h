@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 19:18:34 by rbonneva          #+#    #+#             */
-/*   Updated: 2024/02/18 12:35:48 by mgama            ###   ########.fr       */
+/*   Updated: 2024/02/19 14:49:00 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,9 @@
 # include <stdint.h>
 # include <fcntl.h>
 
-# ifdef __APPLE__
-#  include "../libmlx_mac/mlx.h"
-# else
-#  include "../.libmlx_linux/mlx.h"
-# endif /* __APPLE__ */
+#include "math/math.h"
 
-typedef struct s_data			t_data;
-typedef struct s_img			t_img;
-
-typedef struct s_data
-{
-	void			*mlx;
-	void			*window;
-	t_img			*image;
-}			t_data;
+typedef struct s_img	t_img;
 
 typedef struct s_img
 {
@@ -48,22 +36,29 @@ typedef struct s_img
 	int			height;
 }				t_img;
 
+#define TRANSP_BYTE	0xFF << 24
+
+/* mlx defines */
+
+void	*mlx_new_image(void *,int,int);
+int		mlx_destroy_image(void *,void *);
+char	*mlx_get_data_addr(void *,int *,int *,int *);
+
 /* mlx_pixel_put */
 
-void	ft_mlx_pixel_put(t_img *img, int x, int y, uint32_t color);
-void	ft_pixel_put_to_image(t_img *image, int x, int y, uint32_t color);
+void		ft_pixel_put(t_img *img, int x, int y, uint32_t color);
 
 /* mlx_new_image */
 
-t_img	*ft_new_image(void *mlx_ptr, int width, int height);
-void	ft_delete_image(void *mlx_ptr, t_img **image);
+t_img		*ft_new_image(void *mlx_ptr, int width, int height);
+void		ft_delete_image(void *mlx_ptr, t_img **image);
 
 /* get pixel */
 
-int		ft_get_pixel_from_img(t_img *img, int x, int y);
+uint32_t	ft_get_pixel(t_img *img, int x, int y);
 
-/* put image to window */
+/* drawing */
 
-int		ft_put_image_to_window(t_data *mlx, t_img *image, int x, int y);
+void		ft_draw_rect(t_screen_dim s_dims, t_img *image, uint32_t color);
 
 #endif /* IMAGES_H */

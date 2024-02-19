@@ -6,12 +6,19 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 12:59:22 by mgama             #+#    #+#             */
-/*   Updated: 2024/02/18 13:25:17 by mgama            ###   ########.fr       */
+/*   Updated: 2024/02/19 14:44:01 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FONT_RENDER_H
 # define FONT_RENDER_H
+
+# include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <stdint.h>
+# include <fcntl.h>
+# include "math/math.h"
 
 typedef struct s_img	t_img;
 
@@ -54,12 +61,16 @@ typedef struct s_glyph_draw_context
 	int				glyph_width;
 }				t_glyph_ctx;
 
-// typedef struct s_intersections
-// {
-// 	int			t[WINDOW_WIDTH];
-// 	uint16_t	count;
-// 	uint16_t	y;
-// }				t_intersections;
+#ifndef WINDOW_WIDTH
+# define WINDOW_WIDTH 1440
+#endif /* WINDOW_WIDTH */
+
+typedef struct s_intersections
+{
+	int			t[WINDOW_WIDTH];
+	uint16_t	count;
+	uint16_t	y;
+}				t_intersections;
 
 typedef struct s_metrics_params
 {
@@ -69,9 +80,8 @@ typedef struct s_metrics_params
 	int16_t			*left_side_bearing;
 }				t_metrics_params;
 
-t_string		create_t_string(const char *text, uint32_t size, uint32_t color, const char *font_name);
-
-t_img			*ft_create_string(t_data *mlx, t_font *font, t_string string, int *width, int *height);
+t_img			*ft_create_string(void *mlx, void *image, const char *text,
+					uint32_t size, uint32_t color, const char *font_name, int *width, int *height);
 
 /* text */
 
@@ -104,5 +114,10 @@ void			pointc(t_glyph_ctx *ctx, int x, int y, int color);
 void			move_to(t_glyph_ctx *ctx, int x, int y);
 void			line_to(t_glyph_ctx *ctx, int x, int y);
 void			quadratic_curve_to(t_glyph_ctx *ctx, t_pointi2 c, t_pointi2 e);
+
+/* drawing */
+
+void			ft_quadratic_bezier(t_img *image, t_pointi2	start, t_pointi2 control, t_pointi2 end, uint16_t steps, uint32_t color);
+void			ft_draw_line(t_img *image, t_pointi2 p1, t_pointi2 p2, uint32_t c);
 
 #endif /* FONT_RENDER_H */

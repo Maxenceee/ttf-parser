@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 19:33:04 by mgama             #+#    #+#             */
-/*   Updated: 2024/01/03 14:11:53 by mgama            ###   ########.fr       */
+/*   Updated: 2024/02/19 13:25:48 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,7 @@ int	read_kern_table(t_true_type_font *this,
 		coverage = file->get_uint16(file);
 		if ((coverage >> 8) == 0)
 		{
-			if (push_kern(this, new_ttkern0(file,
-						(coverage & 0x1) == 0, (coverage & 4) != 0)))
+			if (push_kern(this, new_ttkern0(file, (coverage & 0x1) == 0, (coverage & 4) != 0)))
 				return (FONT_ALLOC_ERROR);
 		}
 		else

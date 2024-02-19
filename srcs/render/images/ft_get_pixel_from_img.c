@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_pixel_from_img.c                            :+:      :+:    :+:   */
+/*   ft_get_pixel.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "images.h"
 
-int	ft_get_pixel_from_img(t_img *img, int x, int y)
+uint32_t	ft_get_pixel(t_img *img, int x, int y)
 {
 	int		addr_index;
 	int		*color;

@@ -43,14 +43,19 @@ SRCS			=	$(MANDATORY_DIR)/free_ttf.c \
 					$(MANDATORY_DIR)/parser/reader/methods/br_seek.c \
 					$(MANDATORY_DIR)/parser/reader/methods/br_get_date.c \
 					$(MANDATORY_DIR)/parser/reader/methods/br_get_uint8.c \
-					$(MANDATORY_DIR)/destroy_font.c
-# 					$(MANDATORY_DIR)/render/create_string.c
-# 					$(MANDATORY_DIR)/render/metrics.c
-# 					$(MANDATORY_DIR)/render/kern.c
-# 					$(MANDATORY_DIR)/render/string_dims.c
-# 					$(MANDATORY_DIR)/render/draw_context.c
-# 					$(MANDATORY_DIR)/render/draw_text.c
-# 					$(MANDATORY_DIR)/render/draw_glyph.c
+					$(MANDATORY_DIR)/destroy_font.c \
+					$(MANDATORY_DIR)/render/create_string.c \
+					$(MANDATORY_DIR)/render/metrics.c \
+					$(MANDATORY_DIR)/render/kern.c \
+					$(MANDATORY_DIR)/render/string_dims.c \
+					$(MANDATORY_DIR)/render/draw_context.c \
+					$(MANDATORY_DIR)/render/draw_glyph.c \
+					$(MANDATORY_DIR)/render/draw_text.c \
+					$(MANDATORY_DIR)/render/drawing.c \
+					$(MANDATORY_DIR)/render/images/ft_get_pixel_from_img.c \
+					$(MANDATORY_DIR)/render/images/ft_new_image.c \
+					$(MANDATORY_DIR)/render/images/ft_pixel_put.c \
+					$(MANDATORY_DIR)/render/images/shapes.c
 
 # math
 SRCS			+=	$(MANDATORY_DIR)/math/ft_dist.c \

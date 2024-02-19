@@ -6,11 +6,11 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 22:42:36 by mgama             #+#    #+#             */
-/*   Updated: 2024/02/18 13:29:52 by mgama            ###   ########.fr       */
+/*   Updated: 2024/02/19 13:59:59 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "font_render.h"
+#include "font.h"
 
 uint16_t	get_text_width(t_true_type_font *this,
 	const char *text, uint32_t font_size)

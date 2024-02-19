@@ -6,11 +6,11 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 19:28:17 by mgama             #+#    #+#             */
-/*   Updated: 2024/02/18 13:29:58 by mgama            ###   ########.fr       */
+/*   Updated: 2024/02/19 14:00:05 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "font_render.h"
+#include "font.h"
 
 void	reset_kerns(t_true_type_font *this)
 {

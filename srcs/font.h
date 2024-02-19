@@ -6,24 +6,29 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 13:00:25 by mgama             #+#    #+#             */
-/*   Updated: 2024/02/18 13:22:45 by mgama            ###   ########.fr       */
+/*   Updated: 2024/02/19 14:14:02 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FONT_H
-# define FONT_H
+#ifndef __FONT_H__
+# define __FONT_H__
 
-# include "font_props.h"
+# include "utils/utils.h"
+# include "pcolors.h"
+# include "math/math.h"
+
+// typedef struct s_data			t_data;
+typedef struct s_font			t_font;
+
+# define FONT_NO_ERROR			0x000
+# define FONT_ERROR				0x001
+# define FONT_ALLOC_ERROR		0x002
+
+# define FONT_ERROR_PREFIX		"Font error: "
+# define FONT_ALLOC_ERROR_MSG	"Font error: Could not allocate memory.\n"
+
 # include "parser/font_parser.h"
-// # include "render/font_render.h"
-
-struct s_string
-{
-	uint32_t	size;
-	const char	*text;
-	uint32_t	color;
-	const char	*font_name;
-};
+# include "render/font_render.h"
 
 struct s_font
 {
@@ -31,10 +36,11 @@ struct s_font
 	t_true_type_font	*ttfs;
 };
 
+extern struct s_font	g_font;
+
 /* create new ttf font */
 
-int			ft_create_new_font(t_font *font, const char *type,
-				char *path, const char *font_name);
+int			ft_create_new_font(const char *type, char *path, const char *font_name);
 
 /* destroy ttf font */
 
@@ -48,4 +54,4 @@ void		free_ttf_cmap_caches(t_ttcmap4 *this);
 void		free_ttf_cmap(t_true_type_font *this);
 void		free_ttf_tables(t_true_type_font *this);
 
-#endif /* FONT_H */
+#endif /* __FONT_H__ */

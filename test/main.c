@@ -6,13 +6,21 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 22:50:54 by mgama             #+#    #+#             */
-/*   Updated: 2024/02/18 13:28:27 by mgama            ###   ########.fr       */
+/*   Updated: 2024/02/19 14:46:23 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../srcs/font.h"
-#include "render/font_render.h"
-#include "images/images.h"
+#include "../font.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+
+# ifdef __APPLE__
+#  include "libmlx_mac/mlx.h"
+# else
+#  include "libmlx_linux/mlx.h"
+# endif /* __APPLE__ */
 
 # ifdef __APPLE__
 #  define WINDOW_WIDTH	1280
@@ -22,17 +30,30 @@
 #  define WINDOW_HEIGHT	990
 # endif /* __APPLE__ */
 
+
+typedef struct s_data
+{
+	void			*mlx;
+	void			*window;
+	t_img			*image;
+}			t_data;
+
 void	ft_init_mlx_f(t_data *mlx)
 {
 	mlx->mlx = mlx_init();
 	if (!mlx->mlx)
-		return (ft_error("Error: Could not allocate memory\n"), exit(1));
+		return (exit(1));
 	mlx->window = mlx_new_window(mlx->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "TTF Parser demo");
 	if (!mlx->window)
 		exit(1);
-	mlx->image = ft_new_image(mlx->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
-	if (!mlx->image)
-		exit(1);
+	// mlx->image = ft_new_image(mlx->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	// if (!mlx->image)
+	// 	exit(1);
+}
+
+int	ft_put_image_to_window(t_data *mlx, t_img *image, int x, int y)
+{
+	return (mlx_put_image_to_window(mlx->mlx, mlx->window, image->img, x, y));
 }
 
 int	ft_loop_hook_events(void *param)
@@ -71,13 +92,13 @@ void	ft_init_mlx_hook(t_data *mlx)
 int	main(int ac, char **av)
 {
 	t_data	mlx;
-	t_font	font;
 
-	ft_bzero(&mlx, sizeof(t_data));
+	memset(&mlx, '\0', sizeof(t_data));
 	ft_init_mlx_f(&mlx);
 	ft_init_mlx_hook(&mlx);
-	ft_create_new_font(&font, "ttf", "assets/fonts/comfortaa_bold.ttf", "comfortaa");	
-	mlx.image = ft_create_string(&mlx, &font, create_t_string("Hello World", 50, 0x00FF00, "arial"), NULL, NULL);
+	if (ft_create_new_font("ttf", "../assets/fonts/comfortaa_bold.ttf", "comfortaa"))
+		return (1);
+	mlx.image = ft_create_string(&mlx, NULL, "Hello World", 50, 0x00FF00, "comfortaa", NULL, NULL);
 	mlx_loop(mlx.mlx);
 	return (0);
 }
