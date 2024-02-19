@@ -4,3 +4,4 @@ test/a.out
 test/a.out.dSYM
 ttf_parser.a
 .vscode
+**/.DS_Store
