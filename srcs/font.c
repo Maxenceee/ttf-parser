@@ -6,11 +6,11 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 13:09:41 by mgama             #+#    #+#             */
-/*   Updated: 2024/02/19 13:20:29 by mgama            ###   ########.fr       */
+/*   Updated: 2024/03/24 18:24:11 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "font.h"
+#include "_font.h"
 
 struct s_font	g_font = {0, NULL};
 

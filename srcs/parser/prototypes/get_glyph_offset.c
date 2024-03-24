@@ -6,11 +6,11 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 12:26:28 by mgama             #+#    #+#             */
-/*   Updated: 2024/01/02 12:53:26 by mgama            ###   ########.fr       */
+/*   Updated: 2024/03/24 18:24:11 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "font.h"
+#include "_font.h"
 
 uint32_t	get_glyph_offset(t_true_type_font *this, uint16_t index)
 {

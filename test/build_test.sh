@@ -10,4 +10,6 @@ fi
 
 SRCS="main.c"
 
+make -C ../
+
 gcc $SRCS $MLX_LIB ../ttf_parser.a -g3

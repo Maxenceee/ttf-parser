@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 12:59:22 by mgama             #+#    #+#             */
-/*   Updated: 2024/02/19 14:44:01 by mgama            ###   ########.fr       */
+/*   Updated: 2024/03/24 18:30:38 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ t_hor_metrics	get_horizontal_metrics(t_true_type_font *this, uint16_t glyph_inde
 /* dims */
 
 uint16_t		get_text_width(t_true_type_font *this, const char *text, uint32_t font_size);
-uint16_t		get_text_height(t_true_type_font *this, uint32_t font_size);
+uint16_t		get_text_height(t_true_type_font *this, const char *unused, uint32_t font_size);
 
 /* drawing */
 

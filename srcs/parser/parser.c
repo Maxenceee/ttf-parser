@@ -6,11 +6,11 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 13:10:58 by mgama             #+#    #+#             */
-/*   Updated: 2024/01/12 17:02:45 by mgama            ###   ########.fr       */
+/*   Updated: 2024/03/24 20:09:26 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "font.h"
+#include "_font.h"
 
 uint32_t	get_table_offset(t_true_type_font *this, const char *table)
 {
@@ -28,6 +28,8 @@ uint32_t	get_table_offset(t_true_type_font *this, const char *table)
 static int	read_ttf_tables(t_true_type_font *ttf)
 {
 	if (read_offset_tables(ttf, ttf->file))
+		return (FONT_ALLOC_ERROR);
+	if (read_name_table(ttf, ttf->file, get_table_offset(ttf, "name")))
 		return (FONT_ALLOC_ERROR);
 	if (read_head_table(ttf, ttf->file, get_table_offset(ttf, "head")))
 		return (FONT_ALLOC_ERROR);

@@ -6,14 +6,14 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:22:11 by mgama             #+#    #+#             */
-/*   Updated: 2024/02/19 16:33:51 by mgama            ###   ########.fr       */
+/*   Updated: 2024/03/24 18:54:23 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "font.h"
+#include "_font.h"
 #include "images/images.h"
 
-void	*get_font_by_name(t_font font, const char *font_name)
+t_true_type_font	*get_font_by_name(t_font font, const char *font_name)
 {
 	t_true_type_font	*l;
 
@@ -52,7 +52,7 @@ t_img	*ft_create_string(void *mlx, void *image, const char *text,
 	ctx.width = get_text_width(ttf, text, size);
 	if (width)
 		*width = ctx.width;
-	ctx.height = get_text_height(ttf, size);
+	ctx.height = get_text_height(ttf, NULL, size);
 	if (height)
 		*height = ctx.height;
 	ctx.font_size = size;

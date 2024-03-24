@@ -6,11 +6,11 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 20:38:35 by mgama             #+#    #+#             */
-/*   Updated: 2024/02/18 12:09:34 by mgama            ###   ########.fr       */
+/*   Updated: 2024/03/24 20:09:50 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "font.h"
+#include "_font.h"
 
 /**
  * FIXME:
@@ -18,6 +18,7 @@
  * is the same name_id is called more than one time free the last allocation.
  * 
  */
+
 int	read_name_table_platform(t_true_type_font *this, t_binary_reader *file,
 	uint32_t table_offset, uint32_t string_offset)
 {
@@ -44,27 +45,27 @@ int	read_name_table_platform(t_true_type_font *this, t_binary_reader *file,
 	file->seek(file, old);
 	if (name_id == 1)
 	{
-		if (this->props.font_family)
-			free(this->props.font_family);
-		this->props.font_family = name;
+		if (this->family.font_family)
+			free(this->family.font_family);
+		this->family.font_family = name;
 	}
 	else if (name_id == 2)
 	{
-		if (this->props.font_sub_family)
-			free(this->props.font_sub_family);
-		this->props.font_sub_family = name;
+		if (this->family.font_sub_family)
+			free(this->family.font_sub_family);
+		this->family.font_sub_family = name;
 	}
 	else if (name_id == 4)
 	{
-		if (this->props.full_name)
-			free(this->props.full_name);
-		this->props.full_name = name;
+		if (this->family.full_name)
+			free(this->family.full_name);
+		this->family.full_name = name;
 	}
 	else if (name_id == 6)
 	{
-		if (this->props.postscript_name)
-			free(this->props.postscript_name);
-		this->props.postscript_name = name;
+		if (this->family.postscript_name)
+			free(this->family.postscript_name);
+		this->family.postscript_name = name;
 	}
 	else
 		free(name);
@@ -80,7 +81,7 @@ int	read_name_table(t_true_type_font *this,
 
 	i = -1;
 	file->seek(file, offset);
-	this->props.format = file->get_uint16(file);
+	this->family.format = file->get_uint16(file);
 	count = file->get_uint16(file);
 	string_offset = file->get_uint16(file);
 	while (++i < count)

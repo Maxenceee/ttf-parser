@@ -6,11 +6,11 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 19:25:21 by mgama             #+#    #+#             */
-/*   Updated: 2024/02/19 14:00:08 by mgama            ###   ########.fr       */
+/*   Updated: 2024/03/24 18:24:11 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "font.h"
+#include "_font.h"
 
 int	get_next_char(uint8_t *character, const char *text, int *i)
 {

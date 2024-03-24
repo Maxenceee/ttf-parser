@@ -1024,7 +1024,8 @@ function ShowTtfFile(arrayBuffer)
 
 	var fontSize = 64;
 	// let text = "Hello, wolrd! ofjero inreo - iuniu";
-	let text = "aégçij./&;?!-14";
+	let text = "Hello, World!";
+	// let text = "aégçij./&;?!-14";
 	// let text = "i";
 
 	var width = font.getTextWidth(text, fontSize);
@@ -1077,6 +1078,6 @@ function ShowTtfFile(arrayBuffer)
 }
 
 (async function() {
-	let buffer = await readFile("../assets/fonts/comfortaa_bold.ttf");
+	let buffer = await readFile("/assets/fonts/comfortaa_bold.ttf");
 	ShowTtfFile(buffer);
 })();

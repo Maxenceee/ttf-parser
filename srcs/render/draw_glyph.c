@@ -6,11 +6,11 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 22:03:35 by mgama             #+#    #+#             */
-/*   Updated: 2024/02/19 16:01:56 by mgama            ###   ########.fr       */
+/*   Updated: 2024/03/24 19:33:18 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "font.h"
+#include "_font.h"
 #include "images/images.h"
 
 void	reflect(t_glyph_ctx *ctx, int *x, int *y);
@@ -267,7 +267,7 @@ void fill_simple_glyph(t_glyph *glyph, t_glyph_ctx *ctx, t_pointi2 position) {
 
     // Initialiser les bords en parcourant les contours du glyphe
     int edge_count = 0;
-    t_glyph_contour *contour = glyph->contour_ends;
+    t_glyph_contour *contour = glyph->contours;
     while (contour != NULL) {
         t_glyph_point *current = get_glyph_point_by_id(glyph, contour->val);
         t_glyph_point *next = get_glyph_point_by_id(glyph, (contour->next != NULL) ? contour->next->val : 0);

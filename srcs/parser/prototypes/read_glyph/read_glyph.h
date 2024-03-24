@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:31:12 by mgama             #+#    #+#             */
-/*   Updated: 2024/02/19 13:59:38 by mgama            ###   ########.fr       */
+/*   Updated: 2024/03/24 19:33:18 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,14 @@ typedef struct s_glyph_component
 
 typedef struct s_glyph
 {
-	int16_t			number_of_contours;
+	int16_t			numcontours;
 	uint16_t		numpoints;
 	int16_t			x_min;
 	int16_t			y_min;
 	int16_t			x_max;
 	int16_t			y_max;
 	char			*type;
-	t_glyph_contour	*contour_ends;
+	t_glyph_contour	*contours;
 	t_glyph_point	*points;
 	uint8_t			*flags;
 }				t_glyph;

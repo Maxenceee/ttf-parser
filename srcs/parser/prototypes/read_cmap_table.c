@@ -6,11 +6,11 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 00:27:06 by mgama             #+#    #+#             */
-/*   Updated: 2024/01/12 21:04:35 by mgama            ###   ########.fr       */
+/*   Updated: 2024/03/24 18:24:11 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "font.h"
+#include "_font.h"
 
 int	push_cmap(t_true_type_font *font, void *ttf)
 {

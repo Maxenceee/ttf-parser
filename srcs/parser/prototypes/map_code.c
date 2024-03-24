@@ -6,11 +6,11 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 12:16:41 by mgama             #+#    #+#             */
-/*   Updated: 2023/10/28 22:02:58 by mgama            ###   ########.fr       */
+/*   Updated: 2024/03/24 18:51:10 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "font.h"
+#include "_font.h"
 
 uint16_t	map_code(t_true_type_font *this, uint8_t char_code)
 {

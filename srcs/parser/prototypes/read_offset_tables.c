@@ -6,11 +6,11 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 15:44:59 by mgama             #+#    #+#             */
-/*   Updated: 2024/02/19 13:24:00 by mgama            ###   ########.fr       */
+/*   Updated: 2024/03/24 18:24:11 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "font.h"
+#include "_font.h"
 
 static uint32_t	calculate_table_checksum(t_true_type_font *this,
 	t_binary_reader *file, uint32_t offset, uint32_t length)

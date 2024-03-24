@@ -92,7 +92,7 @@ HEADERS_DIR		=	$(MANDATORY_DIR)
 CC				=	gcc
 LIBC			=	ar rcs
 RM				=	rm -f
-CFLAGS			=	-I$(HEADERS_DIR) -I $(HEADERS_FONT_DIR) -g3 -O0 -Wall -Wextra -Werror
+CFLAGS			=	-I$(HEADERS_DIR) -g3 -O0 -Wall -Wextra -Werror
 
 NAME			=	ttf_parser.a
 
@@ -115,9 +115,6 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@$(LIBC) $(NAME) $(OBJS)
 	@echo "$(GREEN)$(NAME) compiled!$(DEFAULT)"
-
-debug: $(DEBUG_MODE = -D DEBUG_MODE) all
-
 
 clean:
 	@echo "$(RED)Cleaning build folder$(DEFAULT)"

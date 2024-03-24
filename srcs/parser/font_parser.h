@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 12:58:38 by mgama             #+#    #+#             */
-/*   Updated: 2024/02/18 12:09:02 by mgama            ###   ########.fr       */
+/*   Updated: 2024/03/24 19:48:04 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 typedef struct s_true_type_font			t_true_type_font;
 typedef struct s_true_type_font_props	t_true_type_font_props;
+typedef struct s_true_type_font_family	t_true_type_font_family;
 
 typedef struct s_ttf_table
 {
@@ -67,7 +68,10 @@ struct s_true_type_font_props
 	int16_t		caret_offset;
 	int16_t		metric_data_format;
 	uint16_t	num_of_long_hor_metrics;
+};
 
+struct s_true_type_font_family
+{
 	uint16_t	format;
 	char		*font_family;
 	char		*font_sub_family;
@@ -85,6 +89,7 @@ struct s_true_type_font
 	uint16_t					length;
 	t_binary_reader				*file;
 	t_true_type_font_props		props;
+	t_true_type_font_family		family;
 };
 
 /* create new ttf font */

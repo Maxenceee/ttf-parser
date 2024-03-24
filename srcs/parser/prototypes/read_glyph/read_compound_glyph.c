@@ -6,11 +6,11 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 12:40:19 by mgama             #+#    #+#             */
-/*   Updated: 2024/01/12 16:56:47 by mgama            ###   ########.fr       */
+/*   Updated: 2024/03/24 19:32:53 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "font.h"
+#include "_font.h"
 
 static void	read_compound_glyph_flags_scale(t_true_type_font *this,
 	t_rdcompound_glyph *cg)
@@ -66,7 +66,7 @@ static void	read_compound_glyph_push_simple(t_glyph *glyph,
 	int	i;
 
 	i = -1;
-	while (++i < simple_glyph->number_of_contours)
+	while (++i < simple_glyph->numcontours)
 		push_glyph_contour(glyph, get_glyph_contour_by_id(
 				simple_glyph, i)->val + glyph->numpoints);
 	i = -1;
@@ -109,7 +109,7 @@ int	read_compound_glyph(t_true_type_font *this, t_glyph *glyph)
 			read_compound_glyph_push_simple(glyph, &cg, simple_glyph);
 		this->file->seek(this->file, cg.old);
 	}
-	glyph->number_of_contours = get_glyph_contours_length(glyph);
+	glyph->numcontours = get_glyph_contours_length(glyph);
 	if (cg.flags & WE_HAVE_INSTRUCTIONS)
 		this->file->seek(this->file,
 			this->file->get_uint16(this->file) + this->file->tell(this->file));

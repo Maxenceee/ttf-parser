@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 22:50:54 by mgama             #+#    #+#             */
-/*   Updated: 2024/02/19 16:35:05 by mgama            ###   ########.fr       */
+/*   Updated: 2024/03/24 20:18:28 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,21 @@ int	main(int ac, char **av)
 	memset(&mlx, '\0', sizeof(t_data));
 	ft_init_mlx_f(&mlx);
 	ft_init_mlx_hook(&mlx);
-	if (ft_create_new_font("ttf", "../assets/fonts/comfortaa_bold.ttf", "comfortaa"))
+	if (create_new_font("ttf", "../assets/fonts/comfortaa_bold.ttf", "comfortaa"))
 		return (1);
-	t_true_type_font *font = get_font("comfortaa");
+	void *font = get_font("comfortaa");
+	//
+	//
+	//
 	printf("Font loaded %p\n", font);
-	// mlx.image = ft_create_string(&mlx, NULL, "Hello World", 100, 0x00FF00, "comfortaa", NULL, NULL);
-	// mlx_loop(mlx.mlx);
-	return (0);
+	printf("w %u h %u\n", text_width(font, "Hello World", 100), text_height(font, "Hello World", 100));
+	printf("Glyph index %u\n", glyph_index(font, 'H'));
+	printf("Font Family %s\n", get_font_family("comfortaa")->font_family);
+	//
+	//
+	//
+	mlx.image = ft_create_string(&mlx, NULL, "Hello, World!", 100, 0xF0F0F0, "comfortaa", NULL, NULL);
+	mlx_loop(mlx.mlx);
+	delete_font("comfortaa");
+	return (EXIT_SUCCESS);
 }

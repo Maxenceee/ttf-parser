@@ -6,11 +6,11 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 12:33:26 by mgama             #+#    #+#             */
-/*   Updated: 2023/11/21 18:12:14 by mgama            ###   ########.fr       */
+/*   Updated: 2024/03/24 19:33:18 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "font.h"
+#include "_font.h"
 
 t_glyph	*read_glyph(t_true_type_font *this, uint16_t index)
 {
@@ -22,12 +22,12 @@ t_glyph	*read_glyph(t_true_type_font *this, uint16_t index)
 		return (NULL);
 	goffset = get_glyph_offset(this, index);
 	this->file->seek(this->file, goffset);
-	glyph->number_of_contours = this->file->get_int16(this->file);
+	glyph->numcontours = this->file->get_int16(this->file);
 	glyph->x_min = this->file->get_fword(this->file);
 	glyph->y_min = this->file->get_fword(this->file);
 	glyph->x_max = this->file->get_fword(this->file);
 	glyph->y_max = this->file->get_fword(this->file);
-	if (glyph->number_of_contours == -1)
+	if (glyph->numcontours == -1)
 		read_compound_glyph(this, glyph);
 	else
 		read_simple_glyph(this, glyph);
@@ -51,7 +51,7 @@ void	destroy_glyph(t_glyph *glyph)
 		free(point);
 		point = next;
 	}
-	contour = glyph->contour_ends;
+	contour = glyph->contours;
 	while (contour)
 	{
 		next = contour->next;

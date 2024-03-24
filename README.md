@@ -45,5 +45,5 @@ For more info about TTF tables, see [Apple TrueType-Reference-Manual](https://de
 
 	...
 
-	ft_create_new_font("ttf", "path/to/file.ttf", "fontname")
+	create_new_font("ttf", "path/to/file.ttf", "fontname");
 	```

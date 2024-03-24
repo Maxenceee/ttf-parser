@@ -6,22 +6,22 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 00:06:21 by mgama             #+#    #+#             */
-/*   Updated: 2024/01/12 15:58:50 by mgama            ###   ########.fr       */
+/*   Updated: 2024/03/24 19:55:36 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "font.h"
+#include "_font.h"
 
 void	free_ttf_head(t_true_type_font *this)
 {
-	if (this->props.font_family)
-		free(this->props.font_family);
-	if (this->props.font_sub_family)
-		free(this->props.font_sub_family);
-	if (this->props.full_name)
-		free(this->props.full_name);
-	if (this->props.postscript_name)
-		free(this->props.postscript_name);
+	if (this->family.font_family)
+		free(this->family.font_family);
+	if (this->family.font_sub_family)
+		free(this->family.font_sub_family);
+	if (this->family.full_name)
+		free(this->family.full_name);
+	if (this->family.postscript_name)
+		free(this->family.postscript_name);
 }
 
 void	free_ttf_kern(t_true_type_font *this)

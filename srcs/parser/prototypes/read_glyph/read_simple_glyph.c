@@ -6,11 +6,11 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 12:42:56 by mgama             #+#    #+#             */
-/*   Updated: 2024/02/19 13:24:57 by mgama            ###   ########.fr       */
+/*   Updated: 2024/03/24 19:33:18 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "font.h"
+#include "_font.h"
 
 uint16_t	list_max(t_glyph_contour *l)
 {
@@ -93,13 +93,13 @@ int	read_simple_glyph(t_true_type_font *this, t_glyph *glyph)
 
 	glyph->type = "simple";
 	i = -1;
-	while (++i < glyph->number_of_contours)
+	while (++i < glyph->numcontours)
 		if (push_glyph_contour(glyph, this->file->get_uint16(this->file)))
 			return (FONT_ALLOC_ERROR);
 	this->file->seek(this->file, this->file->get_uint16(this->file) + this->file->tell(this->file));
-	if (glyph->number_of_contours == 0)
+	if (glyph->numcontours == 0)
 		return (FONT_NO_ERROR);
-	glyph->numpoints = list_max(glyph->contour_ends) + 1;
+	glyph->numpoints = list_max(glyph->contours) + 1;
 	glyph->flags = malloc(glyph->numpoints * sizeof(uint8_t));
 	if (!glyph->flags)
 		return (FONT_ALLOC_ERROR);

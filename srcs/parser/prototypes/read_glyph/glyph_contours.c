@@ -6,11 +6,11 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 16:07:29 by mgama             #+#    #+#             */
-/*   Updated: 2024/01/12 16:01:34 by mgama            ###   ########.fr       */
+/*   Updated: 2024/03/24 19:33:18 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "font.h"
+#include "_font.h"
 
 int	push_glyph_contour(t_glyph *glyph, uint16_t ncontour)
 {
@@ -23,7 +23,7 @@ int	push_glyph_contour(t_glyph *glyph, uint16_t ncontour)
 		return (FONT_ALLOC_ERROR);
 	id = 0;
 	contour->val = ncontour;
-	tmp = glyph->contour_ends;
+	tmp = glyph->contours;
 	while (tmp)
 	{
 		id = tmp->id;
@@ -37,7 +37,7 @@ int	push_glyph_contour(t_glyph *glyph, uint16_t ncontour)
 		tmp->next = contour;
 	}
 	else
-		glyph->contour_ends = contour;
+		glyph->contours = contour;
 	return (FONT_NO_ERROR);
 }
 
@@ -45,14 +45,14 @@ t_glyph_contour	*get_glyph_contour_by_id(t_glyph *glyph, uint32_t id)
 {
 	t_glyph_contour	*tmp;
 
-	tmp = glyph->contour_ends;
+	tmp = glyph->contours;
 	while (tmp)
 	{
 		if (tmp->id == id)
 			return (tmp);
 		tmp = tmp->next;
 	}
-	return (glyph->contour_ends);
+	return (glyph->contours);
 }
 
 int16_t	get_glyph_contours_length(t_glyph *glyph)
@@ -61,7 +61,7 @@ int16_t	get_glyph_contours_length(t_glyph *glyph)
 	uint16_t		c;
 
 	c = 0;
-	tmp = glyph->contour_ends;
+	tmp = glyph->contours;
 	while (tmp)
 	{
 		c++;
@@ -74,7 +74,7 @@ int16_t	get_glyph_last_contours(t_glyph *glyph)
 {
 	t_glyph_contour	*tmp;
 
-	tmp = glyph->contour_ends;
+	tmp = glyph->contours;
 	while (tmp)
 	{
 		if (!tmp->next)
