@@ -6,7 +6,7 @@ This project is a TrueType Font (.ttf) file parser implemented in the C language
 
 TrueType Font (.ttf) files are widely used to represent fonts in modern computer systems. This parser extracts essential data from .ttf files, such as glyph, header, and index tables, for use in various applications.
 
-The graphical implementation provided with this project utilizes the MLX library, a simplified graphics library for C programming on macOS and Linux, developed by L'école 42.
+The graphical implementation provided with this project utilizes the MLX library, a simplified graphics library for C programming on macOS and Linux, developed by l'École 42.
 
 ## Prerequisites
 
