@@ -6,7 +6,7 @@
 /*   By: mgama <mgama@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 13:00:25 by mgama             #+#    #+#             */
-/*   Updated: 2024/03/24 18:54:49 by mgama            ###   ########.fr       */
+/*   Updated: 2024/03/24 20:29:31 by mgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include "pcolors.h"
 # include "math/math.h"
 
-// typedef struct s_data			t_data;
 typedef struct s_font			t_font;
 
 # define FONT_NO_ERROR			0x000
