@@ -33,8 +33,8 @@ unsigned char	*ft_read_font_file(int fd, unsigned char *file, uint32_t *rsize)
 		if (!file)
 			return (free(buff), NULL);
 		size += read_bytes;
-		*rsize += size;
 	}
+	*rsize = size;
 	free(buff);
 	return (file);
 }
